@@ -1,0 +1,40 @@
+.header{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 60px;
+	background-color: #24292e;
+	margin-bottom: 50px;
+	
+	&-list{
+		margin: 0;
+		padding: 0;
+		display: flex;
+	
+		&__item{
+			font-size: 18px;
+			list-style-type: none;
+			text-decoration: none;
+			color: rgba(#fff,0.7);
+			transition: 0.3s color;
+			margin-right: 30px;
+
+			&.is-active,
+			&:hover{
+				color: #fff;
+			}
+
+			&:last-child{
+				margin-right: 0;
+			}
+
+		}
+
+		&__link{
+			color: inherit;
+			text-decoration: none;
+		}
+
+	}
+
+}
