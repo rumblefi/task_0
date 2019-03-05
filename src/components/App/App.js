@@ -2,11 +2,12 @@ import React, {Component} from 'react'
 import 'normalize.css'
 import './App.scss'
 import Header from '../Header/Header';
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Home from '../pages/Home/Home'
 import News from '../pages/News/News'
 import Login from '../pages/Login/Login'
 import Profile from '../Profile/Profile'
+import NotFound from '../NotFound/NotFound'
 
 export default class App extends Component{
 
@@ -35,14 +36,17 @@ export default class App extends Component{
 				<div className="app">
 					<Header />
 						<div className="app__content">
-							<Route path="/" exact component={Home} />
-							<Route path="/news" component={News} />
-							<Route path="/profile" component={ () =>  (
-								<Profile isLoggedIn={isLoggedIn} onLogOut={this.onLogOut} />
-							)} />
-							<Route path="/login" component={ () => (
-								<Login onLogIn={this.onLogIn} isLoggedIn={isLoggedIn} />
-							)} />
+							<Switch>
+								<Route path="/" exact component={Home} />
+								<Route path="/news" component={News} />
+								<Route path="/profile" component={ () =>  (
+									<Profile isLoggedIn={isLoggedIn} onLogOut={this.onLogOut} />
+								)} />
+								<Route path="/login" component={ () => (
+									<Login onLogIn={this.onLogIn} isLoggedIn={isLoggedIn} />
+								)} />
+								<Route component={NotFound} />
+							</Switch>	
 						</div>
 				</div>
 			</Router>
