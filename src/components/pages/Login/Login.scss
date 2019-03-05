@@ -1,0 +1,39 @@
+.login{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 400px;
+	height: 300px;
+	background-color: rgb(191, 204, 208);
+	padding: 20px;
+
+	&-label{
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 20px;
+
+		&__title{
+			margin-bottom: 10px;
+		}
+
+	}
+
+	&__input{
+		display: flex;
+		width: 100%;
+		height: 42px;
+		padding-left: 15px;
+		padding-right: 15px;
+		box-sizing: border-box;
+	}
+
+	&__error{
+		color: red;
+	}
+
+	&__submit{
+		width: 100%;
+	}
+
+}

@@ -1,15 +1,26 @@
 .header{
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	height: 60px;
+	height: 70px;
 	background-color: #24292e;
-	margin-bottom: 50px;
+	position: relative;
+	color: #fff;
+	padding-left: 100px;
+	padding-right: 100px;
+
+	&__logo{
+		font-size: 26px;
+		color: #fff;
+		text-decoration: none;
+	}
 	
 	&-list{
 		margin: 0;
 		padding: 0;
 		display: flex;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
 	
 		&__item{
 			font-size: 18px;
