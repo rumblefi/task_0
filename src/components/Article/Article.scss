@@ -1,4 +1,4 @@
-article {
+.article {
     display: flex;
     border-radius: 2px;
     background-color: #fff;
@@ -8,6 +8,40 @@ article {
 	
 	&:last-child{
 		margin-bottom: 0;
+	}
+
+	&__col{
+
+		&--first{
+			margin-right: 20px;
+		}
+
+	}
+
+	&__img{
+		height: 200px;
+		width: 200px;
+		object-fit: cover;
+	}
+
+	&__title{
+		display: block;
+		font-size: 18px;
+		font-weight: 600;
+		color: #000;
+		text-decoration: none;
+		margin-bottom: 5px;
+
+		&:hover{
+			text-decoration: underline;
+		}
+
+	}
+
+	&__author{
+		font-size: 12px;
+		color: #757575;
+		margin-bottom: 20px;
 	}
 
 }

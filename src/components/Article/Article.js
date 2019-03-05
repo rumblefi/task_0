@@ -1,11 +1,16 @@
 import React from 'react'
 import './Article.scss'
 
-const Article = () => {
+const Article = ({img,title,author,descr,link}) => {
     return (
 		<article className="article" >
-			<div className="article__img-wrap">
-				<img src="https://avatars0.githubusercontent.com/u/46275?s=400&v=4" alt=""/>
+			<div className="article__col article__col--first">
+				<img src={img} className="article__img" alt=""/>
+			</div>
+			<div className="article__col article__col--last">
+				<a href={link} target="_blank" className="article__title">{title}</a>
+				<div className="article__author">{author}</div>
+				<div className="article__descr">{descr}</div>
 			</div>
 		</article>
     )
