@@ -5,12 +5,16 @@ import homeDataLoaded from '../../actions/homeDataLoaded'
 import withNewsService from '../HOC/withNewsService'
 import compose from '../../utils/compose'
 import Spinner from '../Spinner/Spinner'
+import homeDataRequested from '../../actions/homeDataRequested'
+
 
 class List extends Component {
 
     componentDidMount() {
 
-        const {newsService, homeDataLoaded} = this.props
+        const {newsService, homeDataLoaded, homeDataRequested} = this.props
+
+        homeDataRequested()
         newsService.getHomeData()
             .then(homeDataLoaded)
 
@@ -54,7 +58,8 @@ const mapStateToProps = ({homeData,loading}) => {
 }
 
 const mapDispatchToProps = {
-    homeDataLoaded
+    homeDataLoaded,
+    homeDataRequested
 }
 
 export default compose(withNewsService(), connect(mapStateToProps, mapDispatchToProps))(List)

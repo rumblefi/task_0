@@ -5,12 +5,15 @@ import withNewsService from '../../HOC/withNewsService'
 import newsLoaded from '../../../actions/newsLoaded'
 import compose from '../../../utils/compose'
 import Spinner from '../../Spinner/Spinner'
+import newsRequested from '../../../actions/newsRequested'
 
 class News extends Component {
 
     componentDidMount() {
 
-        const {newsService, newsLoaded} = this.props
+        const {newsService, newsLoaded, newsRequested} = this.props
+
+        newsRequested()
 
         newsService
             .getNews()
@@ -58,7 +61,8 @@ const mapStateToProps = ({news, loading}) => {
 }
 
 const mapDispatchToProps = {
-    newsLoaded
+    newsLoaded,
+    newsRequested
 }
 
 export default compose(withNewsService(), connect(mapStateToProps, mapDispatchToProps))(News)
