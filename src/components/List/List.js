@@ -6,17 +6,20 @@ import withNewsService from '../HOC/withNewsService'
 import compose from '../../utils/compose'
 import Spinner from '../Spinner/Spinner'
 import homeDataRequested from '../../actions/homeDataRequested'
-
+import errorAction from '../../actions/errorAction'
+import ErrorIndicator from '../ErrorIndicator/ErrorIndicator'
 
 class List extends Component {
 
     componentDidMount() {
 
-        const {newsService, homeDataLoaded, homeDataRequested} = this.props
+        const {newsService, homeDataLoaded, homeDataRequested, errorAction} = this.props
 
         homeDataRequested()
-        newsService.getHomeData()
+        newsService
+            .getHomeData()
             .then(homeDataLoaded)
+            .catch(errorAction)
 
     }
 
@@ -35,10 +38,14 @@ class List extends Component {
 
     render() {
 
-        const {loading} = this.props
+        const {loading, error} = this.props
 
-        if(loading) {
-            return <Spinner />
+        if (loading) {
+            return <Spinner/>
+        }
+
+        if(error) {
+            return <ErrorIndicator errorMessage={error} />
         }
 
         return (
@@ -50,16 +57,14 @@ class List extends Component {
 
 }
 
-const mapStateToProps = ({homeData,loading}) => {
-    return {
-        homeData,
-        loading
-    }
+const mapStateToProps = ({homeData, loading, error}) => {
+    return {homeData, loading, error}
 }
 
 const mapDispatchToProps = {
     homeDataLoaded,
-    homeDataRequested
+    homeDataRequested,
+    errorAction
 }
 
 export default compose(withNewsService(), connect(mapStateToProps, mapDispatchToProps))(List)

@@ -56,17 +56,19 @@ export default class NewsService {
     ]
 
     getNews() {
-        return new Promise( (resolve) => {
+        return new Promise( (resolve, reject) => {
             setTimeout(() => {
                 resolve(this.newsData)
+                reject(new Error('News error'))
             }, 700);
         })
     }
 
     getHomeData() {
-        return new Promise( (resolve) => {
+        return new Promise( (resolve, reject) => {
             setTimeout(() => {
                 resolve(this.homeData)
+                reject(new Error('Home error'))
             }, 700);
         })
     }

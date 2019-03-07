@@ -6,18 +6,21 @@ import newsLoaded from '../../../actions/newsLoaded'
 import compose from '../../../utils/compose'
 import Spinner from '../../Spinner/Spinner'
 import newsRequested from '../../../actions/newsRequested'
+import errorAction from '../../../actions/errorAction'
+import ErrorIndicator from '../../ErrorIndicator/ErrorIndicator'
 
 class News extends Component {
 
     componentDidMount() {
 
-        const {newsService, newsLoaded, newsRequested} = this.props
+        const {newsService, newsLoaded, newsRequested, errorAction} = this.props
 
         newsRequested()
 
         newsService
             .getNews()
             .then(newsLoaded)
+            .catch(errorAction)
 
     }
 
@@ -36,10 +39,14 @@ class News extends Component {
 
     render() {
 
-        const {loading} = this.props
+        const {loading, error} = this.props
 
         if(loading) {
             return <Spinner />
+        }
+
+        if(error) {
+            return <ErrorIndicator errorMessage={error} />
         }
 
         return (
@@ -53,16 +60,18 @@ class News extends Component {
 
 }
 
-const mapStateToProps = ({news, loading}) => {
+const mapStateToProps = ({news, loading, error}) => {
     return {
         news, 
-        loading
+        loading,
+        error
     }
 }
 
 const mapDispatchToProps = {
     newsLoaded,
-    newsRequested
+    newsRequested,
+    errorAction
 }
 
 export default compose(withNewsService(), connect(mapStateToProps, mapDispatchToProps))(News)

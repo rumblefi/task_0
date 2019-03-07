@@ -1,10 +1,10 @@
 import React from 'react'
 import './ErrorIndicator.scss'
 
-const ErrorIndicator = () => {
+const ErrorIndicator = ({errorMessage: {message}}) => {
 
 	return(
-		<div className="error-indicator">Error!</div>
+		<div className="error-indicator">{message}</div>
 	)
 
 }
