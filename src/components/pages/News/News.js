@@ -4,15 +4,17 @@ import {connect} from 'react-redux'
 import withNewsService from '../../HOC/withNewsService'
 import newsLoaded from '../../../actions/newsLoaded'
 import compose from '../../../utils/compose'
+import Spinner from '../../Spinner/Spinner'
 
 class News extends Component {
 
     componentDidMount() {
 
         const {newsService, newsLoaded} = this.props
-        const data = newsService.getNews()
-        
-        newsLoaded(data)
+
+        newsService
+            .getNews()
+            .then(newsLoaded)
 
     }
 
@@ -30,25 +32,33 @@ class News extends Component {
     }
 
     render() {
+
+        const {loading} = this.props
+
+        if(loading) {
+            return <Spinner />
+        }
+
         return (
-            <div className="news">
+            <div className="news"  >
                 <h1>News</h1>
                 {this.renderItems()}
             </div>
         )
+
     }
 
 }
 
-const mapStateToProps = ({news}) => {
-    return {news}
+const mapStateToProps = ({news, loading}) => {
+    return {
+        news, 
+        loading
+    }
 }
 
 const mapDispatchToProps = {
     newsLoaded
 }
 
-export default compose(
-    withNewsService(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(News)
+export default compose(withNewsService(), connect(mapStateToProps, mapDispatchToProps))(News)

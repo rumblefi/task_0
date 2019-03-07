@@ -3,9 +3,22 @@ import './Spinner.scss'
 
 const Spinner = () => {
 
-	return(
-		<div>Spinner !</div>
-	)
+    return (
+        <div className="lds-spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    )
 
 }
 

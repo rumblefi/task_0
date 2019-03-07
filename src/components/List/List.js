@@ -4,15 +4,15 @@ import {connect} from 'react-redux'
 import homeDataLoaded from '../../actions/homeDataLoaded'
 import withNewsService from '../HOC/withNewsService'
 import compose from '../../utils/compose'
+import Spinner from '../Spinner/Spinner'
 
 class List extends Component {
 
     componentDidMount() {
 
         const {newsService, homeDataLoaded} = this.props
-        const data = newsService.getHomeData()
-
-        homeDataLoaded(data)
+        newsService.getHomeData()
+            .then(homeDataLoaded)
 
     }
 
@@ -30,6 +30,13 @@ class List extends Component {
     }
 
     render() {
+
+        const {loading} = this.props
+
+        if(loading) {
+            return <Spinner />
+        }
+
         return (
             <ul className="list">
                 {this.renderItems()}
@@ -39,8 +46,11 @@ class List extends Component {
 
 }
 
-const mapStateToProps = ({homeData}) => {
-    return {homeData}
+const mapStateToProps = ({homeData,loading}) => {
+    return {
+        homeData,
+        loading
+    }
 }
 
 const mapDispatchToProps = {
