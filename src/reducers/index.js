@@ -1,18 +1,18 @@
 const initialState = {
-	news: []
+    news: [],
+    homeData: []
 }
 
-const reducer = (state = initialState, action) => {
-	
-	switch(action.type) {
+const reducer = (state = initialState, {type,payload}) => {
 
-		case 'NEWS_LOADED':
-			return{
-				news: action.payload
-			}
-		default:
-			return state	
-	}
+    switch (type) {
+        case 'NEWS_LOADED':
+			return {news: payload}
+		case 'HOME_DATA_LOADED':
+            return {homeData: payload}
+        default:
+            return state
+    }
 
 }
 
