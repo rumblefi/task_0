@@ -8,13 +8,13 @@ const initialState = {
 const reducer = (state = initialState, {type, payload}) => {
 
     switch (type) {
-        case 'NEWS_LOADED':
+        case 'FETCH_NEWS_SUCCESS':
             return {
                 ...state,
                 news: payload,
                 loading: false
             }
-        case 'NEWS_REQUESTED':
+        case 'FETCH_NEWS_REQUEST':
             return {
                 ...state,
                 news: [],
@@ -32,7 +32,7 @@ const reducer = (state = initialState, {type, payload}) => {
                 homeData: [],
                 loading: true
             }
-        case 'ERROR':
+        case 'FETCH_FAILURE':
             return {
                 ...state,
                 loading: false,

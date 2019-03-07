@@ -1,6 +1,6 @@
 const errorAction = (errorInfo) => {
 	return{
-		type: 'ERROR',
+		type: 'FETCH_FAILURE',
 		payload: errorInfo
 	}
 }

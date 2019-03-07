@@ -1,6 +1,6 @@
 const newsRequested = () => {
 	return{
-		type: 'NEWS_REQUESTED'
+		type: 'FETCH_NEWS_REQUEST'
 	}
 }
 

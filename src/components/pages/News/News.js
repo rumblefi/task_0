@@ -2,25 +2,16 @@ import React, {Component} from 'react'
 import Article from '../../Article/Article'
 import {connect} from 'react-redux'
 import withNewsService from '../../HOC/withNewsService'
-import newsLoaded from '../../../actions/newsLoaded'
 import compose from '../../../utils/compose'
 import Spinner from '../../Spinner/Spinner'
-import newsRequested from '../../../actions/newsRequested'
-import errorAction from '../../../actions/errorAction'
 import ErrorIndicator from '../../ErrorIndicator/ErrorIndicator'
+import fetchNews from '../../../actions/fetchNews'
 
 class News extends Component {
 
     componentDidMount() {
 
-        const {newsService, newsLoaded, newsRequested, errorAction} = this.props
-
-        newsRequested()
-
-        newsService
-            .getNews()
-            .then(newsLoaded)
-            .catch(errorAction)
+        this.props.fetchNews()
 
     }
 
@@ -41,16 +32,16 @@ class News extends Component {
 
         const {loading, error} = this.props
 
-        if(loading) {
-            return <Spinner />
+        if (loading) {
+            return <Spinner/>
         }
 
-        if(error) {
-            return <ErrorIndicator errorMessage={error} />
+        if (error) {
+            return <ErrorIndicator errorMessage={error}/>
         }
 
         return (
-            <div className="news"  >
+            <div className="news">
                 <h1>News</h1>
                 {this.renderItems()}
             </div>
@@ -61,17 +52,13 @@ class News extends Component {
 }
 
 const mapStateToProps = ({news, loading, error}) => {
-    return {
-        news, 
-        loading,
-        error
-    }
+    return {news, loading, error}
 }
 
-const mapDispatchToProps = {
-    newsLoaded,
-    newsRequested,
-    errorAction
+const mapDispatchToProps = (dispatch, {newsService}) => {
+    return {
+        fetchNews: fetchNews(newsService, dispatch)
+    }
 }
 
 export default compose(withNewsService(), connect(mapStateToProps, mapDispatchToProps))(News)

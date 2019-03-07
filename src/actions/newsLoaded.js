@@ -1,6 +1,6 @@
 const newsLoaded = (news) => {
 	return{
-		type: 'NEWS_LOADED',
+		type: 'FETCH_NEWS_SUCCESS',
 		payload: news
 	}
 }
